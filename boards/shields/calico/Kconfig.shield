@@ -1,0 +1,5 @@
+config SHIELD_CALICO_LEFT
+    def_bool $(shields_list_contains,calico_left)
+
+config SHIELD_CALICO_RIGHT
+    def_bool $(shields_list_contains,calico_right)

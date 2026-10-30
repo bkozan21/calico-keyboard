@@ -1,0 +1,16 @@
+if SHIELD_CALICO_LEFT
+
+config ZMK_KEYBOARD_NAME
+    default "calico"
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+endif # SHIELD_CALICO_LEFT
+
+if SHIELD_CALICO_LEFT || SHIELD_CALICO_RIGHT
+
+config ZMK_SPLIT
+    default y
+
+endif # SHIELD_CALICO_LEFT || SHIELD_CALICO_RIGHT
