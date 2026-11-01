@@ -8,12 +8,19 @@
     // Set this to the number of columns on the left side.
     col-offset = <9>;
 };
-// 
-// &kscan {
-//     // Replace these comments with the GPIO pins in the matrix for the right side.
-//     // See https://zmk.dev/docs/development/hardware-integration/new-shield#shield-overlays
-//     col-gpios
-//         = <&pro_micro 0 GPIO_ACTIVE_HIGH>
-//         , <&pro_micro 0 GPIO_ACTIVE_HIGH>
-//         ;
-// };
+
+&kscan {
+    // Replace these comments with the GPIO pins in the matrix for the right side.
+    // See https://zmk.dev/docs/development/hardware-integration/new-shield#shield-overlays
+    col-gpios
+            = <&pro_micro 8 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 7 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 6 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 5 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 4 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 3 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 2 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 0 GPIO_ACTIVE_HIGH>
+            , <&pro_micro 1 GPIO_ACTIVE_HIGH>
+            ;
+};
