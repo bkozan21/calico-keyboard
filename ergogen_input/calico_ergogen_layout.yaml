@@ -1,0 +1,334 @@
+meta:
+  engine: 4.2.1
+units:
+  # Proxy Spacing Variables
+  kx: cx
+  ky: cy
+  # Padding Variables
+  px: kx + 4
+  py: ky + 4
+points:
+  zones:
+    matrix:
+      anchor:
+        rotate: 5
+        shift: [100, -150]
+      # Choc spacing
+      # key:
+      #   padding: 1ky
+      #   spread: 1kx
+      columns:
+        extra3:
+          key.column_net: col1
+        extra2:
+          key.column_net: col2
+        extra1:
+          key.column_net: col3
+        pinky:
+          key.column_net: col4
+        ring:
+          key.splay: -5
+          key.origin: [-12, -19]
+          key.stagger: 12
+          key.column_net: col5
+        middle:
+          key.stagger: 5
+          key.column_net: col6
+        index:
+          key.stagger: -6
+          key.column_net: col7
+        inner1:
+          key.stagger: -2
+          key.column_net: col8
+        inner2:
+          rows.bottom.skip: true
+          key.column_net: col9
+      rows:
+        bottom:
+          row_net: row3
+        home:
+          row_net: row4
+        top:
+          row_net: row5
+        numbers:
+          row_net: row6
+        functions:
+          row_net: row7
+    thumbfan:
+      anchor:
+        ref: matrix_inner1_bottom
+        shift: [-7, -19]
+      columns:
+        near:
+          rows.thumb_up.skip: true
+          key.column_net: col7
+        home:
+          key.spread: 21.25
+          key.splay: -28
+          key.origin: [-11.75, -9]
+          key.column_net: col8
+        far:
+          key.spread: 21.25
+          key.splay: -28
+          key.origin: [-9.5, -9]
+          key.column_net: col9
+      rows:
+        thumb:
+          row_net: row1
+        thumb_up:
+          row_net: row2
+
+
+    # arrows:
+    #   anchor: 
+    #     ref: thumbfan_near_thumb
+    #     shift: [-30, -18]
+    #     rotate: 90
+    #   columns:
+    #     bottom:
+    #     top:
+    #       rows.left.skip: true
+    #       rows.right.skip: false  
+    #   rows:
+    #     right:
+    #     middle:
+    #     left:
+
+    arrows:
+      anchor:
+        ref: thumbfan_near_thumb
+        shift: [-68, -18]
+      columns:
+        arrows_left:
+          rows.arrows_top.skip: true
+          key.column_net: col4
+        arrows_middle:
+          key.column_net: col5
+        arrows_right: 
+          key.column_net: col6
+      rows:
+        arrows_bottom:
+          row_net: row1
+        arrows_top:
+          row_net: row2
+        
+
+      
+  # rotate: -20
+
+outlines:
+  raw:
+    - what: rectangle
+      where: true
+      size: [px, py]
+  keys:
+    - what: rectangle
+      where: true
+      size: [kx-0.5,ky-0.5]
+  keys2:
+    - what: rectangle
+      where: true
+      size: [14, 14]
+      fillet: 0
+  board:
+    - what: polygon
+      operation: stack
+      fillet: 2
+      points:
+        - ref: matrix_extra3_functions
+          shift: [-0.5px,0.5py]
+        - ref: matrix_extra2_functions
+          shift: [-0.5px,0.5py]
+        - ref: matrix_extra1_functions
+          shift: [-0.5px,0.5py]
+        - ref: matrix_pinky_functions
+          shift: [-0.5px,0.5py]
+        - ref: matrix_ring_functions
+          shift: [-0.5px,0.5py]
+        - ref: matrix_middle_functions
+          shift: [-0.5px,0.5py]
+        - ref: matrix_middle_functions
+          shift: [0.5px,0.5py]
+        - ref: matrix_index_functions
+          shift: [0.5px,0.5py]
+        - ref: matrix_inner1_functions
+          shift: [0.5px,0.5py]
+        - ref: matrix_inner2_functions
+          shift: [0.5px,0.5py]
+        - ref: matrix_inner2_functions
+          shift: [2px,0.5py]
+        - ref: thumbfan_far_thumb_up
+          shift: [0.5px,0.5px]
+        - ref: thumbfan_far_thumb_up
+          shift: [0.5px,-0.5px]
+        - ref: thumbfan_far_thumb
+          shift: [0.5px,-0.5px]
+        - ref: arrows_arrows_left_arrows_bottom
+          shift: [-0.5px,-0.5px]
+        - ref: matrix_extra3_bottom
+          shift: [-0.5px,-0.5px]
+        
+  combo:
+    - name: board
+    - operation: subtract
+      name: keys
+  top_cover:
+    - name: board
+    - operation: subtract
+      name: keys2
+
+pcbs:
+  main:
+    template: kicad8
+    outlines:
+      main: 
+        outline: board
+    footprints:
+      choc:
+        what: ceoloide/switch_choc_v1_v2
+        where: true
+        params:
+          reversible: true # Enable reversibility
+          hotswap: true # Hotswap sockets instead of through holes
+          include_keycap: true # Show keycap outline on non-fabbed Dwgs.User layer.
+          keycap_width: cx # Keycap Width
+          keycap_height: cy # Keycap Height
+          include_corner_marks: true # Dwgs.User markings for edge of Choc switch.
+          choc_v1_support: true # Enable v1 support.
+          choc_v2_support: false # Disable v2 support so v1 switches will be a bit tighter in the PCB.
+          from: "{{column_net}}" # Column net to Microcontroller.
+          to: "{{colrow}}" # Intersecting column-row net connecting to diode.
+      diode:
+        what: ceoloide/diode_tht_sod123
+        where: true
+        params:
+          reversible: true # Includes SMD pads on both sides of the PCB.
+          include_tht: true # SMD only.
+          from: "{{colrow}}" # Intersecting column-row net connecting to the switch. (Don't swap with 'to'.)
+          to: "{{row_net}}" #  Row net connecting to Microcontroller. (Don't swap with 'from'.)
+        adjust:
+          shift: [0, -5]
+      nicenano:
+        what: ceoloide/mcu_nice_nano
+        where: matrix_inner2_functions # All of the microcontroller parts are anchored to the top-right key as a starting place.
+        adjust:
+          shift: [1kx+8,0ky-6] # A large shift is applied to move these parts into place.
+        params:
+          reversible: true # enable reversibility
+          P21: js_x
+          P20: js_y
+          P19: row7
+          P18: row6
+          P15: row5
+          P14: row4
+          P16: row3
+          P10: row2
+          P1: col1
+          P0: col2
+          P2: col3
+          P3: col4
+          P4: col5
+          P5: col6
+          P6: col7
+          P7: col8
+          P8: col9
+          P9: row1
+      # JST battery header.
+      battery:
+        what: ceoloide/battery_connector_jst_ph_2
+        where: matrix_inner2_home
+        adjust:
+          shift: [1kx+20,1ky+12
+          ]
+          rotate: -90
+        params:
+          reversible: true # Enable reversibility
+          side: F
+      
+      mount1:
+        what: ceoloide/mounting_hole_plated
+        where: matrix_extra3_functions
+        adjust.shift: [0.53cx, -0.56cy]
+        params:
+          drill: 3.4
+          outline: 1.0
+
+      mount2:
+        what: ceoloide/mounting_hole_plated
+        where: matrix_extra3_home
+        adjust.shift: [0.53cx, -0.56cy]
+        params:
+          drill: 3.4
+          outline: 1.0
+
+      mount3:
+        what: ceoloide/mounting_hole_plated
+        where: matrix_extra1_functions
+        adjust.shift: [0.53cx, -0.56cy]
+        params:
+          drill: 3.4
+          outline: 1.0
+
+      mount4:
+        what: ceoloide/mounting_hole_plated
+        where: matrix_extra1_home
+        adjust.shift: [0.53cx, -0.56cy]
+        params:
+          drill: 3.4
+          outline: 1.0
+
+      mount5:
+        what: ceoloide/mounting_hole_plated
+        where: arrows_left_bottom
+        adjust.shift: [-1.0cx, 0cy]
+        params:
+          drill: 3.4
+          outline: 1.0
+
+      mount6:
+        what: ceoloide/mounting_hole_plated
+        where: matrix_ring_functions
+        adjust.shift: [0.563cx, -0.265cy]
+        params:
+          drill: 3.4
+          outline: 1.0
+
+      mount7:
+        what: ceoloide/mounting_hole_plated
+        where: matrix_ring_home
+        adjust.shift: [0.563cx, -0.265cy]
+        params:
+          drill: 3.4
+          outline: 1.0
+
+      mount8:
+        what: ceoloide/mounting_hole_plated
+        where: matrix_inner1_home
+        adjust.shift: [0.8cx, -0.8cy]
+        params:
+          drill: 3.4
+          outline: 1.0
+
+      mount9:
+        what: ceoloide/mounting_hole_plated
+        where: matrix_inner1_functions
+        adjust.shift: [0.53cx, -0.56cy]
+        params:
+          drill: 3.4
+          outline: 1.0
+
+      mount10:
+        what: ceoloide/mounting_hole_plated
+        where: thumbfan_far_thumb
+        adjust.shift: [-1.2cx, -2.0cy]
+        params:
+          drill: 3.4
+          outline: 1.0
+
+      mount11:
+        what: ceoloide/mounting_hole_plated
+        where: thumbfan_far_thumb
+        adjust.shift: [-0.9cx, 1cy]
+        params:
+          drill: 3.4
+          outline: 1.0
