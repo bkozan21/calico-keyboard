@@ -1,20 +1,7 @@
 # Calico Split Keyboard
 
-ID: 79
-Keywords: electronics, keyboard, pcb, kicad, 3d printing
-Skills: soldering, basic programming or at least understanding some C/C++ can be helpful.
-Created by: Bora Kozan
-Making Time: Prep time: 8 hours 3d print time + 7 days for the PCB manufacturing and shipping • Total time: 12 hours (8 hours soldering + 2 hours software configuration + 2 hours putting everything together) • On top of this, I spent a lot of hours researching which parts to use, what software to use, how to use the software I selected, 3d modeling the case, and fine-tuning the 3d print tolerances.
-Introduction: This was a personal project idea. I spent a lot of time during a week in front of a computer typing. Modern keyboards are not that ergonomic. As I was looking for a better keyboard, I came across custom keyboards and decided to make my own.
-Author: Bora Kozan
-General reflection: This project was definitely a good combination of fun and challenging. I spent a lot of hours researching which parts to use, what software to use, how to use the software I selected, 3d modeling the case, and fine-tuning the 3d print tolerances. There were some features that I didn’t get to implement, such as a joystick at each end for mouse input and a base with a tilt. However, the base keyboard functionality is there. It is a usable split wireless keyboard.
-What parts of your experience could other makers benefit from?: I think the fun of designing a keyboard is making it the way you want. People can of course replicate my design but I think this tutorial will also very helpful for people who are designing their own keyboard and need help with the technical details.
-Advice for future students: It took a lot more time than expected. I spent a lot of time researching different steps of the project. In addition making the whole thing took a long time. There are 108 keys. That is 108 sockets and 108 diodes. It all adds up. Just be aware of this. This is not an quick project.
-Tools: Soldering iron, 3d printer, a laptop or a computer, philips screwdriver, tweezers with thin tips for soldering small components
-Author.: KiCad for the PCB, Onshape for 3d modelling
-Made by: Bora Kozan
-Tools - facilities: TU Delft Science Centre (I used the SMD soldering station and the 3d printers there)
-Final result (images): Split%20Keyboard/WhatsApp_Image_2026-11-01_at_16.30.21.jpeg, Split%20Keyboard/WhatsApp_Image_2026-11-01_at_16.30.09.jpeg
+This repository contains software and CAD files for a custom wireless split keyboard. I uses ZMK as firmware. The rest of this README is a tutorial about how to make this or a similar keyboard.
+
 
 # Final product in action
 
@@ -455,6 +442,8 @@ Solder the rest of the components similarly.
 
 The STLs are also on my GitHub repository.
 
+https://github.com/bkozan21/calico-keyboard
+
 </aside>
 
 I designed the case in Onshape. I made the document public. You can view it here:
@@ -471,7 +460,7 @@ Recommended print orientation for the top layer.
 
 Recommended print orientation for the bottom layer.
 
-I used 100% infill for the top layer and the spacers. I used 15% infill for the bottom layer. I used normal PLA for everything. I used the original Prusa i3 MKS3S+ printers with a 0.8 nozzle in the TU Delft Science Centre. I printed everything with 0.40 mm layer height.
+I used 100% infill for the top layer and the spacers. I used 15% infill for the bottom layer. I used normal PLA for everything. I used the original Prusa i3 MKS3S+ printers with a 0.8 nozzle in the TU Delft Science Centre. I printed everything with 0.40 mm layer height. The top layer requires a little bit of support around the microcontroller. I used tree supports in the Prusa slicer. They came of relatively easily.
 
 <aside>
 ⚠️
@@ -486,6 +475,8 @@ Depending on the printer you use, you might need to adjust the tolerances in the
 I added a small inset in the bottom plate for the battery, but I ended up not using it. After removing supports, it was still rough. Just connecting the battery to the socket was enough for me.
 
 </aside>
+
+![IMG_8234.jpeg](Split%20Keyboard/IMG_8234.jpeg)
 
 # Assembly
 
@@ -503,10 +494,11 @@ Be very careful with the LiPo battery. Do not puncture or cut it. Do not short i
 
 1. Put a 10 mm M3 bolt through the mounting holes and the PCB. Then put a 3d printer spacer and a 10 mm M3 spacer.
 
-![IMG_8380.jpeg](Split%20Keyboard/IMG_8380.jpeg)
+![The black piece under the brass M3 spacer is a 3d printer spacer.](Split%20Keyboard/IMG_8380.jpeg)
 
-1. Attach the battery.
-2. Put the bottom layer 3d print and attach it with 5 mm M3 bolts.
+The black piece under the brass M3 spacer is a 3d printer spacer.
+
+1. Put the bottom layer 3d print and attach it with 5 mm M3 bolts.
 
 ![IMG_8496.jpeg](Split%20Keyboard/IMG_8496.jpeg)
 
@@ -724,3 +716,10 @@ Set the switch to the on position on both sides. Now, you should be able to find
 ![Screenshot_20261107_003531.png](Split%20Keyboard/Screenshot_20261107_003531.png)
 
 Once it is connected, it works like a normal Bluetooth keyboard. Once you have it paired with a computer, every time you turn on the keyboard, it will automatically connect to that computer.
+
+<aside>
+✅
+
+Congrats. If you reached this point, this means you have your own custom wireless split keyboard.
+
+</aside>
